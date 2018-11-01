@@ -1,27 +1,26 @@
 import pygame
 import random
 import sys
-from display.grid import Grid
+import time
+import display.Color as Color
+from display.Grid import Grid
+from display.ImageGrid import ImageGrid
 
 
-WHITE = (255,255,255)
-RED = (255, 0, 0)
 def main():
     pygame.init()
-    res = 600,600
+    res    = 600,600
     screen = pygame.display.set_mode(res)
+    sizeX  = sizeY = 200
+    grid   = Grid(screen, sizeX, sizeY)
+    imageGrid = ImageGrid('../img/TestMap.png', sizeX,sizeY)
     
-    grid = Grid(screen, 10, 10)
+    for y in range (0, sizeY):
+        for x in range(0, sizeX):
+            imageCell = imageGrid.getCell(x, y)
+            gridCell  = grid.getCell(x,y)
+            gridCell.fill(imageCell.color)
 
-    for cell in grid.cells:
-        r = random.randint(0,1)
-        if r == 0:
-            cell.fill(screen, WHITE)
-        
-    
-    cell = grid.getCell(3,2)
-    cell.fill(screen, RED)
-    print("Got cell with coordinates: " + str(cell.log_pos))
     pygame.display.flip()
     
     while True:

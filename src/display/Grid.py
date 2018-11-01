@@ -1,5 +1,5 @@
 import pygame
-from . import cell
+from .Cell import Cell
 
 '''
 Logically seperates a surface into a grid of x by x sized cells
@@ -27,10 +27,9 @@ class Grid(object):
         for y in range(0, self.surface.get_height(), cellHeight):
             for x in range(0, self.surface.get_width(), cellWidth):
                 abs_pos = ((x, y),(x + cellWidth, y + cellHeight))
-                log_pos = (int(len(self.cells) % width), int(len(self.cells) / width))
-                c = cell.Cell(abs_pos, log_pos)
+                log_pos = (int(x / cellWidth), int(y / cellHeight))
+                c = Cell(abs_pos, log_pos, surface = self.surface)
                 self.cells.append(c)
-
                 
     def getCell(self, x, y):
         if x < 0 or x > self.width-1:
