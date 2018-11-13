@@ -6,17 +6,15 @@ from PIL   import Image
 
 class ImageGrid(Grid):
 
-
     def saveImage(self):
         fn = str(uuid.uuid4())
         self.img.save("../img/" + fn + ".png" , format = "PNG")
-        
-    
+            
     def _findModeColor(self, abs_pos):
         colorMap   = {}
         modeColor  = (Color.NOT_SET, 0)
         cellWidth  = abs_pos[1][0] - abs_pos[0][0]
-        cellHeight = abs_pos[1][1] - abs_pos[0][1]
+        cellHeight = abs_pos[1][1] - abs_pos[0][1]        
         majority   = int((cellWidth * cellHeight)/2)
     
         for y in range(abs_pos[0][1], abs_pos[1][1]):
@@ -29,7 +27,6 @@ class ImageGrid(Grid):
                     if modeColor[1] >= majority: break
                 except: break
         return modeColor[0]
-    
     
     def _makeImageDivisable(self):
         self.img = self.img.resize((self.imgWidth - (self.imgWidth % self.width), self.imgHeight - (self.imgHeight % self.height)), Image.BILINEAR)
