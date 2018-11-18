@@ -14,11 +14,15 @@ class Cell(object):
     def __init__(self, abs_pos, log_pos, surface = None, color = Color.NOT_SET):
         self.abs_pos = abs_pos
         self.log_pos = log_pos
-        self.width   = abs_pos[1][0] - abs_pos[0][0] + 1
-        self.height  = abs_pos[1][1] - abs_pos[0][1] + 1
+        self.width   = abs_pos[1][0] - abs_pos[0][0]
+        self.height  = abs_pos[1][1] - abs_pos[0][1]
         self.surface = surface
         self.color   = color
         if not (color == Color.NOT_SET or surface is None): self.fill(self.color)
+
+
+    def __str__(self):
+        return str(self.abs_pos)
         
     def fill(self, color):
         if self.surface is None:
@@ -28,4 +32,4 @@ class Cell(object):
                 self.surface.set_at((x,y), color)
         self.color = color
 
-    
+    __repr__ = __str__

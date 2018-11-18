@@ -9,18 +9,26 @@ from display.ProceduralGrid import ProceduralGrid
 
 def main():
     pygame.init()
-    res    = 1000,1000
+    res    = 600,600
     screen = pygame.display.set_mode(res)
-    sizeX  = sizeY = 200
-    grid   = Grid(screen, sizeX, sizeY)
-    print("here")
+    sizeX  = sizeY = 100
     pGrid  = ProceduralGrid(screen,sizeX,sizeY)
     
     pygame.display.flip()
-    
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
-
-
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    print("UP")
+                elif event.key == pygame.K_DOWN:
+                    print("DOWN")
+                elif event.key == pygame.K_LEFT:
+                    print("LEFT")
+                elif event.key == pygame.K_RIGHT:
+                    print("RIGHT")
+                    pGrid.move(x=10, y=0)
+                    pygame.display.flip()
+                    
 if __name__=='__main__': main()
